@@ -20,7 +20,7 @@ in the TARGET project's repo, and a launch line handed back to the user.
 
 "Complete" is almost always harder to define than it first looks — do NOT accept the goal
 as given. Interrogate it one question at a time: ask, propose a recommended default answer,
-wait for a confirmation or correction, then ask the next one. Keep going until all five below
+wait for a confirmation or correction, then ask the next one. Keep going until all six below
 have concrete answers:
 
 1. **Artifact-first.** "When this is done, what file/test-output/screenshot/commit exists
@@ -35,8 +35,13 @@ have concrete answers:
    claim must name where you looked, not just that you didn't see it).
 5. **Scope fence.** "What is explicitly NOT included?" → charter §Boundaries + STATE §Parked.
    Unfenced scope is how loops never finish.
+6. **Verifier capability.** "What does the thing that verifies this ACTUALLY have?" A
+   read-only verifier subagent typically has no database or MCP access — this kit's
+   bundled `verifier` agent (`agents/verifier.md`) ships with Read/Grep/Glob/Bash only.
+   A verify step that needs more is invalid unless a different agent (or a human) with
+   the right credentials is named explicitly → charter §Verifier capability.
 
-Trivial-case exemption: if all five answer themselves in one read, say so and fill the
+Trivial-case exemption: if all six answer themselves in one read, say so and fill the
 templates without the interview.
 
 ### Step 2 — Compile the legs
@@ -83,6 +88,9 @@ required for the mechanism to work, just a good backstop if you have one.
 
 If the run will mutate git and something else might be touching the same repo at the same
 time, do the work in an isolated git worktree so the two don't collide.
+
+If nobody will be watching this run, answer charter §Unattended pre-flight first — all
+three questions, or don't launch unattended.
 
 ## Mode: Resume
 
